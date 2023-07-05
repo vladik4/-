@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+// Функція для обчислення НСД (найбільшого спільного дільника)
+int nsd(int a, int b) {
+    if (b == 0) {
+        return a;
+    }
+    return nsd(b, a % b);
+}
+
+// Функція для обчислення НСК (найменшого спільного кратного)
+int nsk(int a, int b) {
+    return (a * b) / nsd(a, b);
+}
+
+// Функція для знаходження НСК для множини чисел
+int find_nsk(int arr[], int n) {
+    int result = arr[0];
+    for (int i = 1; i < n; i++) {
+        result = nsk(result, arr[i]);
+    }
+    return result;
+}
+
+int main() {
+    int n;
+    printf("Введіть кількість чисел в множині: ");
+    scanf("%d", &n);
+
+    int arr[100];
+    printf("Введіть числа: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int nsk_result = find_nsk(arr, n);
+    printf("НСК для заданої множини чисел: %d\n", nsk_result);
+
+    return 0;
+}
