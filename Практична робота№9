@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+unsigned int minSteps(int x, int y) {
+    if (x == y) {
+        return 0;
+    }
+
+    unsigned int steps = 0;
+    int diff = y - x;
+
+    // Обробка випадку, коли diff є додатним числом
+    if (diff > 0) {
+        while (diff > 0) {
+            if (diff % 2 == 0) {
+                diff /= 2;
+            } else if (diff % 4 == 1 || diff == 3) {
+                diff--;
+            } else {
+                diff++;
+            }
+            steps++;
+        }
+    }
+    // Обробка випадку, коли diff є від'ємним числом
+    else {
+        while (diff < 0) {
+            if (diff % 2 == 0) {
+                diff /= 2;
+            } else if (diff % 4 == 3 || diff == -1) {
+                diff++;
+            } else {
+                diff--;
+            }
+            steps++;
+        }
+    }
+
+    return steps;
+}
+
+int main() {
+    int x, y;
+
+    // Введення значень x та y
+    printf("Введіть значення x: ");
+    scanf("%d", &x);
+    printf("Введіть значення y: ");
+    scanf("%d", &y);
+
+    // Обчислення мінімальної кількості кроків
+    unsigned int result = minSteps(x, y);
+
+    // Виведення результату
+    printf("Мінімальна кількість кроків: %u\n", result);
+
+    return 0;
+}
